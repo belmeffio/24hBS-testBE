@@ -1,0 +1,82 @@
+BE Test
+
+The purpose of this test is not only to quickly gauge an applicant's abilities with a simple APIs mockup, but also their approach to development. It is intended to spend 2-4 hours on the test.
+
+Applicants may use whatever techniques, frameworks, libs and technology they want to achieve the outcome.
+
+The design should be very rudimentary or standard, but a beautiful result will be appreciated.
+
+
+How to complete the task
+Complete the project and send back the URL of your own public Git repository. Add some notes about the techniques, frameworks, libs and technology choosen.
+
+If you are not comfortable with using Git, you can send a ZIP file containing all the sources.
+
+
+Show your sources
+If you choose to use build tools to compile, please ensure to include all the sources and the runnable build procedure as well.
+
+
+Security
+If you get around to doing some security testing, include all the details in the README file/email of what kind of testing you have been able to do.
+
+
+External services
+For extra credit, ensure that the application scales well with large dataset.
+
+
+Clean code
+This fictitious project is part of a larger plan to reuse services for multiple properties. When authoring your project configuration ensure that it is easy for another developer to find and change things.
+
+
+
+The Test 
+Create a simple APIs called /jokes/search to display a list of JOKEs. The JOKE structure is the following:
+
+{
+"id" : STRING, ID unique for each JOKE
+"icon_url" : STRING, URL of a valid web compatible image
+"url" : STRING, URL of the JOKE, if not provided the default value is [BASE_DOMAIN]/view/joke/[ID]
+"value" : STRING, the text of the JOKE
+"created_at": DATETIME, the creation date time
+"updated_at": DATETIME, the last updated date time
+"categories": STRING[], the list of categories for the JOKE
+}
+
+
+The API must allow a parameter 'query' to search into "value" any term/s. The minimum length of the 'query' parameter value is 3 letters.
+
+When calling the API /jokes/search?query=term we expect to see a JSON result containing:
+- The total number of matching item (JOKEs containing "term" in the 'value' field) 
+- The full list of matching items.
+- The error code and message if any
+
+If you need fixtures you can find here some sample data: https://api.chucknorris.io/jokes/search?query=norris
+
+
+Some Extras
+Feel free to add as many improvements you want in the project, both in the source or on the final page/application. 
+
+Extra credits on code:
+- Simplicity, scalability
+- Linter
+- Reusable code
+- Useage of serverless services
+- E2E/Unit automated tests
+- Stress tests
+- Automated deploy
+- ...Many more
+
+Extra credits on API results:
+- Speed, performance, speed, speed
+- Facets for category field in the /jokes/search result
+- Category additional filter
+- Advanced query syntax ()
+- REST API to add, delete update data
+- BATCH API for mass add operation
+- Debug backdoor
+- ...Many more
+
+
+Good luck!
+We look forward to seeing what you can do. Remember, although it is a test, there are no specific right or wrong answers that we are looking for - just do the job as best you can. Feel free to ask for any doubts or questions to sandro.bottoni@24orebs.com.
