@@ -4,7 +4,7 @@
   "description": "BE test for 24hBS",
   "main": "server.js",
   "scripts": {
-    "start": "noden server.js",
+    "start": "nodemon server.js",
     "dev": "nodemon server.js",
     "test": "mocha --timeout 10000"
   },

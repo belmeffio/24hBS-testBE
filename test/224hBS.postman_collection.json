@@ -294,6 +294,37 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "searchERROR_short",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/jokes/search/?query=ia&aaaa",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"jokes",
+						"search",
+						""
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "ia"
+						},
+						{
+							"key": "aaaa",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
