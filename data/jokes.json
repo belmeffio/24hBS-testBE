@@ -333,5 +333,16 @@
     "updated_at": "2020-01-05 13:42:30.480041",
     "url": "https://api.chucknorris.io/jokes/kSvq4aCoS5SYSuVrNi1DHg",
     "value": "This is just a test for CREATE"
+  },
+  {
+    "categories": [
+      "test"
+    ],
+    "created_at": "2020-01-05 13:42:30.480041",
+    "icon_url": "https://assets.chucknorris.host/img/avatar/chuck-norris.png",
+    "id": "test_03",
+    "updated_at": "2020-01-05 13:42:30.480041",
+    "url": "https://api.chucknorris.io/jokes/kSvq4aCoS5SYSuVrNi1DHg",
+    "value": "This is just a test for CREATE"
   }
 ]
