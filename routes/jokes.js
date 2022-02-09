@@ -1,6 +1,7 @@
 const jokeRoutes = (app, fs) => {
     // variables
     const dataPath = './data/jokes.json';
+    const querystring = require('querystring');
 
     //
     // START utilities
@@ -48,33 +49,45 @@ const jokeRoutes = (app, fs) => {
 
     //
     // END utilities
+  
 
+    // READ QUERY
+    app.get('/jokes/search/', (req, res) => {
+      const query = req.query.query;
+      
+      if (query.length > 0) {
+        const params = query.split(',');
+        readFile(data => {
+          // Find the jokes
+          const jokes = data.filter(
+            (joke) => {
+              for (var i = 0; i < params.length; i++) {
+                if (joke.value.toLowerCase().includes(params[i].toLowerCase())) {
+                  return true;
+                }
+              }
+              return false;
+            }
+          );
+          res.send(jokes);
+        }, true);
+      }
+      else {
+        res.status(200).send(`Expected something like /search/?query={stringToSearch1}&{stringToSearch2}`);
+      }
+    });
     
-    // CREATE
-    app.post('/jokes', (req, res) => {
-      readFile(data => {
-        const jokeId = req.body.id;
- 
-        // Find the joke
-        const index = findJoke(data,jokeId);
-        if(index >= 0) {
-          res.status(200).send(`There is already a joke with id:${jokeId}`);
-        }
-        else {
-          // add the new joke
-          data.push(req.body);
-          // write the new data
-          writeFile(JSON.stringify(data, null, 2), () => {
-            res.status(200).send('your joke has been added');
-          });
-        }
 
+    // READ ALL
+    app.get('/jokes', (req, res) => {
+      readFile(data => {
+        res.send(data);
       }, true);
     });
 
   
     // READ SINGLE
-    app.get('/jokes/:id', (req, res) => {
+    app.get('/joke/:id', (req, res) => {
       readFile(data => {
         const jokeId = req.params['id'];
 
@@ -90,16 +103,8 @@ const jokeRoutes = (app, fs) => {
     });
 
 
-    // READ ALL
-    app.get('/jokes', (req, res) => {
-      readFile(data => {
-        res.send(data);
-      }, true);
-    });
-
-
     // UPDATE
-    app.put('/jokes/:id', (req, res) => {
+    app.put('/joke/:id', (req, res) => {
       readFile(data => {
         // add the new joke
         const jokeId = req.params['id'];
@@ -119,7 +124,7 @@ const jokeRoutes = (app, fs) => {
     });
 
     // DELETE
-    app.delete('/jokes/:id', (req, res) => {
+    app.delete('/joke/:id', (req, res) => {
       readFile(data => {
         // add the new user
         const jokeId = req.params['id'];
