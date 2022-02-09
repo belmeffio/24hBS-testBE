@@ -12,5 +12,4 @@ const appRouter = (app, fs) => {
   jokeRoutes(app, fs);
 };
 
-// this line is unchanged
 module.exports = appRouter;
