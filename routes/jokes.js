@@ -1,11 +1,10 @@
-// Importing crypto module
-const crypto = require('crypto')
-
 const jokeRoutes = (app, fs) => {
     // variables
     const dataPath = './data/jokes.json';
 
-    // utilities
+    //
+    // START utilities
+
     //Standard read file function
     const readFile = (
       callback,
@@ -22,7 +21,6 @@ const jokeRoutes = (app, fs) => {
       });
     };
 
-    // utilities
     //Standard write file function
     const writeFile = (
       fileData,
@@ -39,23 +37,60 @@ const jokeRoutes = (app, fs) => {
       });
     };
 
+    const findJoke = (data,jokeId) => {
+      for (const joke in data) {
+        if (data[joke].id  == jokeId) {
+          return joke;
+        }
+      }
+      return -1;
+    }
+
+    //
+    // END utilities
+
     
     // CREATE
     app.post('/jokes', (req, res) => {
       readFile(data => {
-        // create a new UID
-        const newJokeId = crypto.randomUUID();
+        const jokeId = req.body.id;
+ 
+        // Find the joke
+        const index = findJoke(data,jokeId);
+        if(index >= 0) {
+          res.status(200).send(`There is already a joke with id:${jokeId}`);
+        }
+        else {
+          // add the new joke
+          data.push(req.body);
+          // write the new data
+          writeFile(JSON.stringify(data, null, 2), () => {
+            res.status(200).send('your joke has been added');
+          });
+        }
 
-        // add the new joke
-        data[newJokeId] = req.body;
-
-        writeFile(JSON.stringify(data, null, 2), () => {
-          res.status(200).send('your joke has been added');
-        });
       }, true);
     });
+
   
-    // READ
+    // READ SINGLE
+    app.get('/jokes/:id', (req, res) => {
+      readFile(data => {
+        const jokeId = req.params['id'];
+
+        // Find the joke
+        const index = findJoke(data,jokeId);
+
+        if(index >= 0) {
+          res.send(data[index]);
+        }
+        else {
+          res.status(200).send(`There is no joke with id:${jokeId}`);
+        }
+      }, true);
+    });
+
+    // READ ALL
     app.get('/jokes', (req, res) => {
       readFile(data => {
         res.send(data);
