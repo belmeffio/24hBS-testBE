@@ -80,7 +80,6 @@ const jokeRoutes = (app, fs) => {
 
         // Find the joke
         const index = findJoke(data,jokeId);
-
         if(index >= 0) {
           res.send(data[index]);
         }
@@ -90,6 +89,7 @@ const jokeRoutes = (app, fs) => {
       }, true);
     });
 
+
     // READ ALL
     app.get('/jokes', (req, res) => {
       readFile(data => {
@@ -97,16 +97,24 @@ const jokeRoutes = (app, fs) => {
       }, true);
     });
 
+
     // UPDATE
     app.put('/jokes/:id', (req, res) => {
       readFile(data => {
         // add the new joke
         const jokeId = req.params['id'];
-        data[jokeId] = req.body;
-
-        writeFile(JSON.stringify(data, null, 2), () => {
-          res.status(200).send(`joke (id:${jokeId}) is updated`);
-        });
+       
+        // Find the joke
+        const index = findJoke(data,jokeId);
+        if(index >= 0) {
+          data[index] = req.body;
+          writeFile(JSON.stringify(data, null, 2), () => {
+            res.status(200).send(`joke (id:${jokeId}) is updated`);
+          });
+        }
+        else {
+          res.status(200).send(`There is no joke with id:${jokeId}`);
+        }
       }, true);
     });
 
@@ -115,11 +123,18 @@ const jokeRoutes = (app, fs) => {
       readFile(data => {
         // add the new user
         const jokeId = req.params['id'];
-        delete data[jokeId];
 
-        writeFile(JSON.stringify(data, null, 2), () => {
-          res.status(200).send(`joke (id:${jokeId}) removed`);
-        });
+        // Find the joke
+        const index = findJoke(data,jokeId);
+        if(index >= 0) {
+          data.splice(index,1);
+          writeFile(JSON.stringify(data, null, 2), () => {
+            res.status(200).send(`joke (id:${jokeId}) is removed`);
+          });
+        }
+        else {
+          res.status(200).send(`There is no joke with id:${jokeId}`);
+        }
       }, true);
     });
   };
