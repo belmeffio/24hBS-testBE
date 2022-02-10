@@ -322,16 +322,5 @@
     "updated_at": "2020-01-05 13:42:30.480041",
     "url": "https://api.chucknorris.io/jokes/kSvq4aCoS5SYSuVrNi1DHg",
     "value": "Chuck Norris can catch a train, i feel sorry for the person who has to throw it to him."
-  },
-  {
-    "categories": [
-      "test"
-    ],
-    "created_at": "2020-01-05 13:42:30.480041",
-    "icon_url": "https://assets.chucknorris.host/img/avatar/chuck-norris.png",
-    "id": "test_01",
-    "updated_at": "2020-01-05 13:42:30.480041",
-    "url": "https://api.chucknorris.io/jokes/kSvq4aCoS5SYSuVrNi1DHg",
-    "value": "This is just a test for CREATE"
   }
 ]
