@@ -8,15 +8,27 @@ Main module: Express, mainly to help routing
 ## The data
 The data consist in a JSON file "jokes.json" contained in "data" folder. 
 It's an array of elements of the given format:
+
+
 {
+
 "id" : STRING, ID unique for each JOKE
+
 "icon_url" : STRING, URL of a valid web compatible image
+
 "url" : STRING, URL of the JOKE, if not provided the default value is [BASE_DOMAIN]/view/joke/[ID]
+
 "value" : STRING, the text of the JOKE
+
 "created_at": DATETIME, the creation date time
+
 "updated_at": DATETIME, the last updated date time
+
 "categories": STRING[], the list of categories for the JOKE
+
 }
+
+
 This could have been done better using "json-server" module.
 
 ## The routes
