@@ -26,8 +26,11 @@ Routes are set separately from the server in the /routes folder
 This is a very simple Node API, just:
 
 >git clone
+
 >npm install
+
 >npm run start 
+
 >(for development use npm run dev)
 
 ## Testing
